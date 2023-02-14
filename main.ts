@@ -60,6 +60,10 @@ export default class MyPlugin extends Plugin {
       		var cc = contents.slice(_start);
       		var ch_start = cc.search(/[^\]\-\s]/i) + _start;
     	}
+		// 匹配标题
+		if(contents.search(/#+\s+/i)==0){
+      		var ch_start = contents.search(/[^#\s]/i);
+    	}
 		let cursorStart = { line: lineNr, ch: ch_start };
 		let cursorEnd = { line: lineNr, ch: contents.length };
 		let content = editor.getRange(cursorStart, cursorEnd) + "\n";
