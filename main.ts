@@ -30,7 +30,9 @@ export default class MyPlugin extends Plugin {
 			var ch_start = contents.search(/[^\s0-9\.]/i);
 		} else if (contents.search(/>\s+/i) == 0) {// >+空格
 			var ch_start = contents.search(/[^>\s]/i);
-		} else if (contents.search(/[0-9]\.\s+/i) == 0) { // 数字+.+空格
+		}else if (contents.search(/>/i) == 0) { // >
+      		var ch_start = contents.search(/[^>]/i);
+    	} else if (contents.search(/[0-9]\.\s+/i) == 0) { // 数字+.+空格
 			var ch_start = contents.search(/[^\s0-9\.]/i);
 		} else if (contents.search(/\+\s+/i) == 0) { // 加号+空格
 			var ch_start = contents.search(/[^\+\s]/i);
@@ -45,17 +47,17 @@ export default class MyPlugin extends Plugin {
 			// var ch_start = 0;
 		}
 		// 匹配 callout
-		if (contents.search(/>\s+\[\![a-z]+\]\s+/i) == 0) {
+		if (contents.search(/>\s*\[\![a-z]+\]\s+/i) == 0) {
       		var _start = contents.indexOf(']');
       		var cc = contents.slice(_start);
       		var ch_start = cc.search(/[^\]\s]/i) + _start;
     	}
-    	if (contents.search(/>\s+\[\![a-z]+\]\+\s+/i) == 0) { // 匹配 callout（+）
+    	if (contents.search(/>\s*\[\![a-z]+\]\+\s+/i) == 0) { // 匹配 callout（+）
       		var _start = contents.indexOf(']');
       		var cc = contents.slice(_start);
       		var ch_start = cc.search(/[^\]\+\s]/i) + _start;
     	}
-    	if (contents.search(/>\s+\[\![a-z]+\]\-\s+/i) == 0) { // 匹配 callout（-）
+    	if (contents.search(/>\s*\[\![a-z]+\]\-\s+/i) == 0) { // 匹配 callout（-）
       		var _start = contents.indexOf(']');
       		var cc = contents.slice(_start);
       		var ch_start = cc.search(/[^\]\-\s]/i) + _start;
