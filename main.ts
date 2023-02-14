@@ -28,11 +28,9 @@ export default class MyPlugin extends Plugin {
 			var ch_start = contents.search(/[^>\s0-9\.]/i);
 		} else if (contents.search(/\s+[0-9]\.\s+/i) == 0) {// 空格+数字+.+空格
 			var ch_start = contents.search(/[^\s0-9\.]/i);
-		} else if (contents.search(/>\s+/i) == 0) {// >+空格
+		} else if (contents.search(/>\s*/i) == 0) {// >+空格
 			var ch_start = contents.search(/[^>\s]/i);
-		}else if (contents.search(/>/i) == 0) { // >
-      		var ch_start = contents.search(/[^>]/i);
-    	} else if (contents.search(/[0-9]\.\s+/i) == 0) { // 数字+.+空格
+		}else if (contents.search(/[0-9]\.\s+/i) == 0) { // 数字+.+空格
 			var ch_start = contents.search(/[^\s0-9\.]/i);
 		} else if (contents.search(/\+\s+/i) == 0) { // 加号+空格
 			var ch_start = contents.search(/[^\+\s]/i);
