@@ -44,11 +44,22 @@ export default class MyPlugin extends Plugin {
 			var ch_start = contents.search(/[^\s]/i);
 			// var ch_start = 0;
 		}
-
-		if (contents.search(/>\s+\[\![a-z]+\]\s+/i) == 0) {  // 匹配 callout
-			var ch_start = contents.search(/[^>\s\[\]\!a-z]/i);
-		}
-
+		// 匹配 callout
+		if (contents.search(/>\s+\[\![a-z]+\]\s+/i) == 0) {
+      		var _start = contents.indexOf(']');
+      		var cc = contents.slice(_start);
+      		var ch_start = cc.search(/[^\]\s]/i) + _start;
+    	}
+    	if (contents.search(/>\s+\[\![a-z]+\]\+\s+/i) == 0) { // 匹配 callout（+）
+      		var _start = contents.indexOf(']');
+      		var cc = contents.slice(_start);
+      		var ch_start = cc.search(/[^\]\+\s]/i) + _start;
+    	}
+    	if (contents.search(/>\s+\[\![a-z]+\]\-\s+/i) == 0) { // 匹配 callout（-）
+      		var _start = contents.indexOf(']');
+      		var cc = contents.slice(_start);
+      		var ch_start = cc.search(/[^\]\-\s]/i) + _start;
+    	}
 		let cursorStart = { line: lineNr, ch: ch_start };
 		let cursorEnd = { line: lineNr, ch: contents.length };
 		let content = editor.getRange(cursorStart, cursorEnd) + "\n";
